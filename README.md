@@ -88,7 +88,7 @@ While the Indian Trail data shows many similarities to the other locations (part
 ## Code
 
 This repository contains one Malloy code file:
-- [`S.malloy`](SLA.malloy), short for 'Spokane Library Attendance', this file performs the analysis on the data provided by the Spokane Library.
+- [`SLA.malloy`](SLA.malloy), short for 'Spokane Library Attendance', this file performs the analysis on the data provided by the Spokane Library.
 
 This repository contains three CSV files:
 - [`gates_full(gates_full).csv`](gates_full(gates_full).csv), provides data on the attendance of the libraries.
