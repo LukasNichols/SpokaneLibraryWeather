@@ -7,7 +7,7 @@ The Spokane Public Library is a vital resource for the community, providing free
 
 ## Summary of Findings
 ### 1 - Liberty Park
-<img width="790" alt="Image" src="https://github.com/user-attachments/assets/405444bf-7924-41fd-80d9-44d85f450d5c" />
+<img width="775" alt="Image" src="https://github.com/user-attachments/assets/88477d5a-f024-4435-b225-84a645f40091" />
 
 ### 2 - South Hill
 <img width="763" alt="Image" src="https://github.com/user-attachments/assets/3d03513a-5b3c-4d01-941c-fc58bafa90c1" />
