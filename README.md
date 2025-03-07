@@ -1,5 +1,5 @@
 # Spokane Public Library Attendance and Weather Correlation Using Statistical Analysis
-[![License](https://img.shields.io/badge/License-CC0-lightgray.svg?style=flat-square)](https://creativecommons.org/publicdomain/zero/1.0/) ![GitHub last commit](https://img.shields.io/github/last-commit/LukasNichols/[SpokaneLibraryWeather](https://github.com/LukasNichols/SpokaneLibraryWeather))
+[![License](https://img.shields.io/badge/License-CC0-lightgray.svg?style=flat-square)](https://creativecommons.org/publicdomain/zero/1.0/) 
 
 ## Motivation
 
