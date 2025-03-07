@@ -6,8 +6,14 @@ This repository contains data obtained by [Professor Timothy Olsen](https://www.
 The Spokane Public Library is a vital resource for the community, providing free access to knowledge, technology, and cultural enrichment. It serves as a hub for lifelong learning, offering books, research materials, educational programs, and digital resources for people of all ages. The library also fosters community engagement through events, workshops, and meeting spaces, ensuring that everyone—regardless of background—has opportunities to grow, connect, and succeed. Whether supporting students, job seekers, or casual readers, the Spokane Public Library plays a crucial role in enhancing education, literacy, and accessibility in the region.
 
 ## Summary of Findings
+### 1 - Liberty Park
+<img width="790" alt="Image" src="https://github.com/user-attachments/assets/405444bf-7924-41fd-80d9-44d85f450d5c" />
 
-Summarize the findings of your analysis. Try to be as interesting as possible. Don't share everything, just the most interesting things. Required. Place an image of 2-4 of your visualizations here. To do this. Save the screenshot as an image file, place it in the same directory. Check out this link for help on showing your image directly in this file: https://www.docstomarkdown.pro/display-local-images-in-markdown/
+### 2 - South Hill
+
+### 3 - Central Spokane
+
+### 4 - Shadle Park 
 
 ## Directions on How to Run it Yourself
 Steps.
