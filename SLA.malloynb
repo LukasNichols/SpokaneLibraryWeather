@@ -1,0 +1,282 @@
+>>>markdown
+## Spokane Library Attendance Affected by Weather
+
+By: Lukas Nichols\
+By: Brandon Dubouis\
+By: Griffin Linn
+>>>malloy
+Source: LibraryAttendance is duckdb.table("./circ_dataSPL.csv") extend{
+    primary_key: day1
+    accept: `Branch`, `Station`, `Date`, `Time`, `Transaction`, `Item`
+    rename: day1 is `Date`
+    measure: LibraryCount is count()
+    dimension: year1 is year(day1)
+    dimension: month1 is month(day1)
+    
+}
+
+source: data is duckdb.sql("""
+   SELECT * FROM read_csv('circ_dataSPL.csv',
+       all_varchar = true
+   )
+""") extend {
+   dimension:
+   day_time is concat(`Date`,' ',Time)
+   day1 is strptime!timestamp(day_time, '%-m/%-d/%-y %-I:%M %p')::date
+   -- time is strptime!timestamp
+   --reopenDate is strptime!date(Reopen Date, '%b-%d-%Y')
+   date_branch is concat(day1.day,Branch)
+   primary_key: day1
+}
+Source: SpokaneTemp is duckdb.table("./spokane-temp-1.csv") extend{ 
+    primary_key: day1
+    join_one: LibraryAttendance with day1
+    join_one: data with day1
+    rename:
+        day1 is `Date`
+    dimension: year1 is year(day1)
+    dimension: month1 is month(day1)
+    measure:
+        AvgTemp is (sum(MaxTemperature) + sum(MinTemperature)) / 2
+}
+Source: DoorEntrance is duckdb.table("./gates_full(gates_full).csv") extend{ 
+    join_one: LibraryAttendance with day1
+    join_one: SpokaneTemp with day1
+    join_one: data with day1
+    rename: 
+        Entry is `In`
+        day1 is `Date`
+    measure: 
+        All_Locations_Visits is sum(Entry)
+    dimension: year1 is year(day1)
+    dimension: month1 is month(day1)
+}
+
+
+-- }
+>>>malloy
+run: DoorEntrance -> {
+    select: *
+    limit: 5
+}
+>>>malloy
+query: checkouts is data -> {
+--# bar_chart
+ group_by:  day2 is day1.day, Branch
+ aggregate: checkouts1 is count()
+  --where: `Date`:::date is null
+    where: Branch = "Hillyard"
+ order_by: day2 asc
+}
+>>>markdown
+## How many people are going to the library throughout the year?
+>>>markdown
+### Hillyard
+>>>malloy
+--# line_chart
+run: DoorEntrance -> {
+    group_by: day1 where: year1 = 2024
+    aggregate: 
+            All_Locations_Visits
+            AvgSnowfall is SpokaneTemp.Snowfall.avg()
+            AvgMaxTemperature is SpokaneTemp.MaxTemperature.avg() 
+            AvgMinTemperature is SpokaneTemp.MinTemperature.avg()
+            AvgSnowDepth is SpokaneTemp.SnowDepth.avg()
+            AvgTemp is (SpokaneTemp.MaxTemperature.avg() + SpokaneTemp.MinTemperature.avg()) / 2
+    calculate:
+            Visit_Change is All_Locations_Visits - lag(All_Locations_Visits, 1)
+            TempChange is round(AvgTemp - lag(AvgTemp, 1), 2)
+    group_by: Branch where: Branch = 'Hillyard'
+    order_by: day1 asc
+    limit: 10000
+}
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day3 is day1 where: year1 = 2024
+    calculate:
+        VisitChange is All_Locations_Visits - lag(All_Locations_Visits, 1)
+    group_by: Branch where: Branch = 'Hillyard'
+    limit: 10000
+} -> {
+    group_by: day3, VisitChange
+    order_by: VisitChange desc
+    limit: 10
+}
+>>>markdown
+#### Statistical Significance
+* Intercept
+* AvgMinTemperature - One unit increase in AvgMinTemperature leads to a 7.7 unit decrease in Total Visits
+>>>markdown
+### Shadle Park
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day1 where: year1 = 2024
+    aggregate: 
+            All_Locations_Visits
+            AvgSnowfall is SpokaneTemp.Snowfall.avg()
+            AvgMaxTemperature is SpokaneTemp.MaxTemperature.avg() 
+            AvgMinTemperature is SpokaneTemp.MinTemperature.avg()
+            AvgSnowDepth is SpokaneTemp.SnowDepth.avg()
+            AvgTemp is (SpokaneTemp.MaxTemperature.avg() + SpokaneTemp.MinTemperature.avg()) / 2
+    calculate:
+            Visit_Change is All_Locations_Visits - lag(All_Locations_Visits, 1)
+            TempChange is round(AvgTemp - lag(AvgTemp, 1), 2)
+    group_by: Branch where: Branch = 'Shadle Park'
+    order_by: day1 asc
+    limit: 10000
+}
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day3 is day1 where: year1 = 2024
+    calculate:
+        VisitChange is All_Locations_Visits - lag(All_Locations_Visits, 1)
+    group_by: Branch where: Branch = 'Shadle Park'
+    limit: 10000
+} -> {
+    group_by: day3, VisitChange
+    order_by: VisitChange desc
+    limit: 10
+}
+>>>markdown
+#### Statistical Significance
+* Intercept
+>>>markdown
+### Central
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day1 where: year1 = 2024
+    aggregate: 
+            All_Locations_Visits
+            AvgSnowfall is SpokaneTemp.Snowfall.avg()
+            AvgMaxTemperature is SpokaneTemp.MaxTemperature.avg() 
+            AvgMinTemperature is SpokaneTemp.MinTemperature.avg()
+            AvgSnowDepth is SpokaneTemp.SnowDepth.avg()
+            AvgTemp is (SpokaneTemp.MaxTemperature.avg() + SpokaneTemp.MinTemperature.avg()) / 2
+    calculate:
+            Visit_Change is All_Locations_Visits - lag(All_Locations_Visits, 1)
+            TempChange is round(AvgTemp - lag(AvgTemp, 1), 2)
+    group_by: Branch where: Branch = 'Central'
+    order_by: day1 asc
+    limit: 10000
+}
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day3 is day1 where: year1 = 2024
+    calculate:
+        VisitChange is All_Locations_Visits - lag(All_Locations_Visits, 1)
+    group_by: Branch where: Branch = 'Central'
+    limit: 10000
+} -> {
+    group_by: day3, VisitChange
+    order_by: VisitChange desc
+    limit: 10
+}
+>>>markdown
+#### Statistical Significance
+* Intercept
+* AvgMinTemperature - One unit increase in AvgMinTemperature leads to a decrease in Total Visits by 13
+* AvgSnowDepth - A one unit increase in AvgSnowDepth leads to a decrease in Total Visits by 129
+>>>markdown
+### South Hill
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day1 where: year1 = 2024
+    aggregate: 
+            All_Locations_Visits
+            AvgSnowfall is SpokaneTemp.Snowfall.avg()
+            AvgMaxTemperature is SpokaneTemp.MaxTemperature.avg() 
+            AvgMinTemperature is SpokaneTemp.MinTemperature.avg()
+            AvgSnowDepth is SpokaneTemp.SnowDepth.avg()
+            AvgTemp is (SpokaneTemp.MaxTemperature.avg() + SpokaneTemp.MinTemperature.avg()) / 2
+    calculate:
+            Visit_Change is All_Locations_Visits - lag(All_Locations_Visits, 1)
+            TempChange is round(AvgTemp - lag(AvgTemp, 1), 2)
+    group_by: Branch where: Branch = 'South Hill'
+    order_by: day1 asc
+    limit: 10000
+}
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day3 is day1 where: year1 = 2024
+    calculate:
+        VisitChange is All_Locations_Visits - lag(All_Locations_Visits, 1)
+    group_by: Branch where: Branch = 'South Hill'
+    limit: 10000
+} -> {
+    group_by: day3, VisitChange
+    order_by: VisitChange desc
+    limit: 10
+}
+>>>markdown
+#### Statistical Significance
+* Intercept
+* AvgMaxTemperature - A one unit increase in AvgMaxTemperature leads to a 2 unit increase in Total Visits
+>>>markdown
+### Liberty Park
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day1 where: year1 = 2024
+    aggregate: 
+            All_Locations_Visits
+            AvgSnowfall is SpokaneTemp.Snowfall.avg()
+            AvgMaxTemperature is SpokaneTemp.MaxTemperature.avg() 
+            AvgMinTemperature is SpokaneTemp.MinTemperature.avg()
+            AvgSnowDepth is SpokaneTemp.SnowDepth.avg()
+            AvgTemp is (SpokaneTemp.MaxTemperature.avg() + SpokaneTemp.MinTemperature.avg()) / 2
+    calculate:
+            Visit_Change is All_Locations_Visits - lag(All_Locations_Visits, 1)
+            TempChange is round(AvgTemp - lag(AvgTemp, 1), 2)
+    group_by: Branch where: Branch = 'Liberty Park'
+    order_by: day1 asc
+    limit: 10000
+}
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day3 is day1 where: year1 = 2024
+    calculate:
+        VisitChange is All_Locations_Visits - lag(All_Locations_Visits, 1)
+    group_by: Branch where: Branch = 'Liberty Park'
+    limit: 10000
+} -> {
+    group_by: day3, VisitChange
+    order_by: VisitChange desc
+    limit: 10
+}
+>>>markdown
+#### Statistical Significance
+* Intercept
+* AvgMaxTemperature - A one unit increase in AvgMaxTemperature leads to a 2.6 unit increase in Total Visits
+>>>markdown
+### Indian Trail
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day1 where: year1 = 2024
+    aggregate: 
+            All_Locations_Visits
+            AvgSnowfall is SpokaneTemp.Snowfall.avg()
+            AvgMaxTemperature is SpokaneTemp.MaxTemperature.avg() 
+            AvgMinTemperature is SpokaneTemp.MinTemperature.avg()
+            AvgSnowDepth is SpokaneTemp.SnowDepth.avg()
+            AvgTemp is (SpokaneTemp.MaxTemperature.avg() + SpokaneTemp.MinTemperature.avg()) / 2
+    calculate:
+            Visit_Change is All_Locations_Visits - lag(All_Locations_Visits, 1)
+            TempChange is round(AvgTemp - lag(AvgTemp, 1), 2)
+    group_by: Branch where: Branch = 'Indian Trail'
+    order_by: day1 asc
+    limit: 10000
+}
+>>>malloy
+run: DoorEntrance -> {
+    group_by: day3 is day1 where: year1 = 2024
+    calculate:
+        VisitChange is All_Locations_Visits - lag(All_Locations_Visits, 1)
+    group_by: Branch where: Branch = 'Indian Trail'
+    limit: 10000
+} -> {
+    group_by: day3, VisitChange
+    order_by: VisitChange desc
+    limit: 10
+}
+>>>markdown
+#### Statistical Significance
+* Intercept
