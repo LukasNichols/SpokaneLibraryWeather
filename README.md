@@ -10,10 +10,13 @@ The Spokane Public Library is a vital resource for the community, providing free
 <img width="790" alt="Image" src="https://github.com/user-attachments/assets/405444bf-7924-41fd-80d9-44d85f450d5c" />
 
 ### 2 - South Hill
+<img width="763" alt="Image" src="https://github.com/user-attachments/assets/3d03513a-5b3c-4d01-941c-fc58bafa90c1" />
 
 ### 3 - Central Spokane
+<img width="762" alt="Image" src="https://github.com/user-attachments/assets/3bfd5d31-4cf1-447d-9a19-ffe11337deb0" />
 
 ### 4 - Shadle Park 
+<img width="759" alt="Image" src="https://github.com/user-attachments/assets/f277e48c-48a6-4589-b232-174a896c3d32" />
 
 ## Directions on How to Run it Yourself
 Steps.
