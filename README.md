@@ -23,6 +23,8 @@ Temperature variables maintain expected intercorrelations: As with all previous 
 Liberty Park shows the clearest temperature-visitation relationship among all the locations analyzed, suggesting that visitors to this park are more influenced by temperature than visitors to the other parks. The strong correlation between visits and visit change remains consistent with other locations. For Liberty Park management, this indicates that temperature is a more important factor in visitor behavior than at other parks, which could inform seasonal planning and programming. The park might consider enhancing warm-weather amenities or activities to capitalize on the increased visitation during warmer periods, while developing specific strategies to attract visitors during cooler weather.
 
 <img width="775" alt="Image" src="https://github.com/user-attachments/assets/88477d5a-f024-4435-b225-84a645f40091" />
+### Liberty Park - Final Statement 
+Visitors come more often when it's warmer - this park shows the clearest connection between temperature and visitor numbers compared to other parks.
 
 ### 2 - South Hill Correlation Analysis
 ### Overview
@@ -37,7 +39,9 @@ Weak negative correlation with snowfall: South Hill shows a weak but statistical
 South Hill demonstrates the strongest weather-visitation relationship among all locations analyzed. The data clearly shows that visitors to South Hill are more influenced by temperature (positively) and snowfall (negatively) than visitors to most other parks. The strong relationship between visits and visit change remains consistent. For South Hill management, these findings clearly indicate that weather conditions play a meaningful role in visitor behavior. This suggests opportunities for seasonal adaptations in programming and amenities, potentially focusing on unique cold-weather offerings to counteract the natural decline in visitation during cooler or snowier periods, while maximizing the park's appeal during warmer seasons.
 
 <img width="759" alt="Image" src="https://github.com/user-attachments/assets/f277e48c-48a6-4589-b232-174a896c3d32" />
-
+### South Hill - Final Statement
+Weather has the biggest impact here - warmer days bring more visitors and snowy days keep people away more than at any other park.
+ 
 ### 3 - Central Spokane Correlation Analysis
 ### Overview
 This is a correlation matrix for data collected in Central Spokane, with a sample size of 361. The matrix shows relationships between various factors including location visits, weather conditions (snowfall, temperatures, snow depth), and changes in visits and temperature. The yellow highlights indicate statistically significant correlations at p < .01 (correlation coefficients with absolute values ≥ .135), while lighter highlights indicate significance at p < .05 (correlation coefficients with absolute values ≥ .103).
@@ -50,6 +54,8 @@ Minimal weather impact on visitation: Interestingly, weather conditions (tempera
 ### Conclusion
 The data indicates that visitation to locations in Central Spokane is largely independent of weather conditions, which is somewhat surprising for a region that experiences significant seasonal weather variations. The strongest relationship exists between total visits and visit change, suggesting that popular locations continue to gain in popularity. Temperature variables behave as expected, showing strong internal correlations and expected negative relationships with snow metrics. For decision-makers in Central Spokane, this analysis suggests that weather-based planning for visitor services may be less important than focusing on trends in visitation growth at already-popular locations.
 <img width="762" alt="Image" src="https://github.com/user-attachments/assets/3bfd5d31-4cf1-447d-9a19-ffe11337deb0" />
+### Central Spokane - Final Statement
+Weather doesn't really affect visitor numbers - people come regardless of whether it's warm or snowy.
 
 ### 4 - Shadle Park Correlation Analysis 
 ### Overview
@@ -63,6 +69,8 @@ Weather has minimal impact on visitation: Similar to Central Spokane, weather co
 ### Conclusion
 The Shadle Park data shows remarkably similar patterns to the Central Spokane analysis. Visitation appears largely independent of weather conditions, while the strongest relationship remains between total visits and visit change. The consistency between these two locations suggests a regional pattern where visitor behavior in Spokane is minimally affected by weather variables, despite seasonal weather variations. For Shadle Park management, this suggests that other factors beyond weather (such as programming, amenities, or existing popularity) are likely more important drivers of visitation patterns.
 <img width="763" alt="Image" src="https://github.com/user-attachments/assets/3d03513a-5b3c-4d01-941c-fc58bafa90c1" />
+### Shadle Park - Final Statement
+Similar to Central Spokane, visitors come regardless of the weather, suggesting other factors like activities or facilities matter more.
 
 ### 5 - Indian Trail Correlation Analysis
 ### Overview
@@ -76,6 +84,8 @@ Temperature variables maintain strong intercorrelations: As with the other locat
 ### Conclusion
 While the Indian Trail data shows many similarities to the other locations (particularly the strong visits-visit change relationship and the temperature intercorrelations), it differs in showing a modest positive relationship between temperatures and visitation. This suggests that Indian Trail visitors may be somewhat more influenced by temperature than visitors to Central Spokane or Shadle Park. This could be due to the specific amenities, location characteristics, or user demographics of Indian Trail. Park managers might consider this temperature sensitivity when planning seasonal activities or improvements at this specific location, though the correlation remains relatively modest.
 <img width="737" alt="Image" src="https://github.com/user-attachments/assets/032a74bf-d8b2-44f9-a74d-2bb9cc625473" />
+### Indian Trail - Final Statement
+Slightly more visitors on warmer days, but the effect is modest - temperature matters a bit more here than at Central Spokane or Shadle Park.
 
 ## Directions on How to Run it Yourself
 
